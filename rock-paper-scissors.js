@@ -1,15 +1,63 @@
-//Assign number 1, 2, and 3 a value of rock, paper, and scissor
-//Ask user to choose rock, paper, or scissor
-//Store input in variable
-//Randomly generate a number variable that is <=1 and >=3
-//Compare user input to random number
-//Console.log result of comparison
-//Assign output array
-//Run chooseWeapon function again
-//Console.log result of comparison
-//Assign output to array
-//IF array[0] output == 2, you win ELSEIF array [1] == 2, you lose, ELSE run chooseWeapon again
-//Run chooseWeapon function again
-//Assign output to array
-//IF array[0] == 2, you win best 2/3 ELSE you lose!
-//console.log result
+//randomize computers choice
+
+function getComputerChoice() {
+  let num = Math.floor(Math.random() * 3);
+
+//assign random number to a value
+  if (num === 0) {
+    return "rock"
+  } else if (num === 1) {
+    return "paper"
+  } else {
+    return "scissors"
+  }
+}
+
+//prompt player for a choice
+function getPlayerChoice() {
+  let choice = prompt("Choose your weapon! Rock, paper, or scissors?", "Your Weapon");
+  let weapon = choice.toLowerCase();
+  if (choice === null || choice === "" || choice === undefined) {
+    return getPlayerChoice();
+  } else {
+    return weapon;
+  }
+}
+
+//store player and computers choices and which round currently on
+let pScore = 0;
+let cScore = 0;
+let rnd = 1;
+
+//compare players choice and computers choice and add one to the winners score
+function playRound() {
+  let playerChoice = getPlayerChoice();
+  let computerChoice = getComputerChoice();
+ if (playerChoice == "rock" && computerChoice == "paper" || playerChoice == "paper" && computerChoice == "scissors" || playerChoice == "scissors" && computerChoice == "rock") {
+  alert("You lose this round!");
+  ++cScore;
+ } else if (playerChoice == "paper" && computerChoice == "rock" || playerChoice == "scissors" && computerChoice == "paper" || playerChoice == "rock" && computerChoice == "scissors") {
+  alert("You won this round!");
+  ++pScore;
+ } else if (playerChoice == computerChoice) {
+  alert("You tied!")
+ } else {
+  alert("That wasn't a weapon you could choose!")
+ }
+ console.log("Player score: " + pScore)
+ console.log("Computer score: " + cScore)
+ console.log("Round " + rnd + "/5")
+}
+
+//play the game for 5 rounds and log who won
+for (let round = 1; round <= 5; round++) {playRound(); rnd++;
+  if (pScore >= cScore && round == 5)  {
+    console.log("You won the game!")
+  } else if (pScore <= cScore && round == 5) {
+    console.log("You lost the game :(")
+  } else if (pScore == cScore && round == 5) {
+    console.log("You tied")
+  } else {
+    console.log("")
+  }
+}
